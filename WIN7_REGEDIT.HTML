@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+
+        body {
+            background: #4ca1af;
+            background: -webkit-linear-gradient(to right,#4ca1af, #c4e0e5);
+            background: linear-gradient(to right,#4ca1af, #c4e0e5);
+            font-size: 20px;
+        }
+
+        div {
+            width: 600px;
+            margin: 50px;
+        }
+
+        section {
+            width: 60%;
+            margin: 50px auto;
+            border: 2px solid green;
+        }
+
+    </style>
+
+    <header>
+
+    </header>
+
+    <main>
+
+        <section>
+
+            <div>
+
+                <h1>Как сделать открытие ftp ресурсов Windows Explorer-ом по умолчанию?</h1>
+                        <P>Возможно, сработает решение, подсказанное умным человеком на следующем ресурсе:
+                <a href="http://www.cyberforum.ru/windows7/thread1220062.html" target="_blank">http://www.cyberforum.ru/windows7/thread1220062.html</a>
+            
+                
+                Во-всяком случае, у меня на Win 7 x64 это сработало. Судя по-всему, проблема открытия ftp в проводнике вызывается удалением одной из веток реестра, отвечающих за работу с ftp. Восстановление этой ветки по аналогии с реестром компьютера, на котором все работает штатно, приводит к желаемым результатам. На всякий случай, перепечатываю параметры, приведенные автором решения (@ - параметр по умолчанию). Соответствующие разделы и параметры нужно создать на компьютере с проблемой:</P>
+                
+                [HKEY_CLASSES_ROOT\ftp]<br>
+                "Source Filter"="{E436EBB6-524F-11CE-9F53-0020AF0BA770}"<br>
+                "ShellFolder"="{63da6ec0-2e98-11cf-8d82-444553540000}"<br>
+                @="URL:File Transfer Protocol"<br>
+                "AppUserModelID"="Microsoft.InternetExplorer.Default"<br>
+                "EditFlags"=dword:00200002<br>
+                "URL Protocol"=""<br>
+                "FriendlyTypeName"="@C:\\Windows\\System32\\ieframe.dll,-905"<br><br>
+                
+                [HKEY_CLASSES_ROOT\ftp\DefaultIcon]<br>
+                @="C:\\Windows\\System32\\url.dll,0"<br><br>
+                
+                [HKEY_CLASSES_ROOT\ftp\shell]<br>
+                @="open"<br><br>
+                
+                [HKEY_CLASSES_ROOT\ftp\shell\open]<br>
+                "CommandId"="IE.Protocol"<br><br>
+                
+                [HKEY_CLASSES_ROOT\ftp\shell\open\command]<br>
+                @="\"C:\\Program Files\\Internet Explorer\\iexplore.exe\" %1"<br>
+                "DelegateExecute"="{17FE9752-0B5A-4665-84CD-569794602F5C}"<br>
+
+                <a href="https://social.technet.microsoft.com/Forums/ru-RU/d57392e0-75d9-44b0-a432-42233af68576/108210721082-1089107610771083107210901100?forum=windows7ru" target="_blank">author</a>
+            </div>
+
+        </section>
+
+    </main>
+    
+</body>
+</html>
